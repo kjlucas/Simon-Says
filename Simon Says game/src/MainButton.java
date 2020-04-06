@@ -31,16 +31,16 @@ public class MainButton extends JButton {
 	public int getButtonPitchExp() {
 		return buttonPitchExp;
 	}
-	public double getButtonPitch() {
-		return 440 * Math.pow(2, getButtonPitchExp()/12.0);
-	}
+//	public double getButtonPitch() {
+//		return 440 * Math.pow(2, getButtonPitchExp()/12.0);
+//	}
 	public Color getColor() {
 		return buttonCol;
 	}
 
 	@Override
 	public String toString() {
-		return "Button [Button Color :\n " + buttonCol.toString() + "\n Button Pitch : " + getButtonPitch() + "]";
+		return "Button [Button Color :\n " + buttonCol.toString() + "\n Button Pitch : " + getButtonPitchExp() + "]";
 	}
 
 }

@@ -15,6 +15,10 @@ public class Main{
 			}
 			
 		});
+		//Make random color patterns
 		
+//		while(true) {
+//			
+//		}
 	}
 }
