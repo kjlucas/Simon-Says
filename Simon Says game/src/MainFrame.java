@@ -7,14 +7,14 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame{
 
-	public MainButton redB;
-	public MainButton yellowB;
-	public MainButton greenB;
-	public MainButton blueB;
-	public MainButton[] buttons = {redB    = new MainButton(Color.red), 
-								   yellowB = new MainButton(new Color(249, 207, 93)), 
-								   greenB  = new MainButton(Color.green), 
-								   blueB   = new MainButton(Color.blue)
+	public MainButton   redB;
+	public MainButton   yellowB;
+	public MainButton   greenB;
+	public MainButton   blueB;
+	public MainButton[] buttons = {redB    = new MainButton(Color.red,"1"), 
+								   yellowB = new MainButton(new Color(249, 207, 93),"2"), 
+								   greenB  = new MainButton(Color.green,"3"), 
+								   blueB   = new MainButton(Color.blue,"4")
 								  };
 	
 	public MainFrame() {
@@ -28,7 +28,6 @@ public class MainFrame extends JFrame{
 			i.setBackground(Color.lightGray);
 		}
 		
-		
 		setLayout(new GridLayout(2,2,10,10));
 		
 		
@@ -37,4 +36,5 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+	
 }

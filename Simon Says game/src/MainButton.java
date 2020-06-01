@@ -26,6 +26,26 @@ public class MainButton extends JButton {
 		}
 
 	}
+	
+	@SuppressWarnings("deprecation")
+	public MainButton(Color color, String string) {
+		this.buttonCol=color;
+		setBorder(BorderFactory.createLineBorder(color, 7));
+		setOpaque(true);
+
+		if (color == Color.red) {
+			this.buttonPitchExp = 4; // Db
+		} else if (color == Color.blue) {
+			this.buttonPitchExp = 6; // Eb
+		} else if (color == Color.green) {
+			this.buttonPitchExp = 8; //  F
+		} else if (color.equals(new Color(249, 207, 93))) {
+			this.buttonPitchExp = 11;// Ab
+		} else {
+			this.buttonPitchExp = 0;
+		}
+		setLabel(string);
+	}
 
 
 	public int getButtonPitchExp() {
