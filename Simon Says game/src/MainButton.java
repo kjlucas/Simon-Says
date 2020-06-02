@@ -4,7 +4,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class MainButton extends JButton {
-	final private int buttonPitchExp; // The tone the buttons makes
+	public int buttonPitchExp; // The tone the buttons makes
 	final private Color buttonCol;
 
 	public MainButton(Color color) {
@@ -50,6 +50,9 @@ public class MainButton extends JButton {
 
 	public int getButtonPitchExp() {
 		return buttonPitchExp;
+	}
+	public void setButtonPitchExp(int newExp) {
+		this.buttonPitchExp = newExp;
 	}
 //	public double getButtonPitch() {
 //		return 440 * Math.pow(2, getButtonPitchExp()/12.0);
