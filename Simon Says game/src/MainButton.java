@@ -3,7 +3,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
-public class MainButton extends JButton {
+public class MainButton extends JButton{
 	public int buttonPitchExp; // The tone the buttons makes
 	final private Color buttonCol;
 

@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -26,6 +28,39 @@ public class MainFrame extends JFrame{
 			i.setBorder(BorderFactory.createLineBorder(i.getColor(),7));
 			i.setOpaque(true);
 			i.setBackground(Color.lightGray);
+			i.addMouseListener(new MouseListener() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					i.setBackground(i.getColor());
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					i.setBackground(Color.lightGray);
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 		}
 		
 		setLayout(new GridLayout(2,2,10,10));
