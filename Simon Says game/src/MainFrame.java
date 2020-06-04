@@ -9,14 +9,18 @@ import javax.swing.JFrame;
 
 public class MainFrame extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public MainButton   redB;
 	public MainButton   yellowB;
 	public MainButton   greenB;
 	public MainButton   blueB;
-	public MainButton[] buttons = {redB    = new MainButton(Color.red,"1"), 
-								   yellowB = new MainButton(new Color(249, 207, 93),"2"), 
-								   greenB  = new MainButton(Color.green,"3"), 
-								   blueB   = new MainButton(Color.blue,"4")
+	public MainButton[] buttons = {redB    = new MainButton(Color.red), 
+								   yellowB = new MainButton(new Color(249, 207, 93)), 
+								   greenB  = new MainButton(Color.green), 
+								   blueB   = new MainButton(Color.blue)
 								  };
 	
 	public MainFrame() {
@@ -39,12 +43,17 @@ public class MainFrame extends JFrame{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					// TODO Auto-generated method stub
+					
+					i.setPressed(true);
 					i.setBackground(i.getColor());
+					i.playTone();
+					
 				}
 
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					// TODO Auto-generated method stub
+					i.setPressed(false);
 					i.setBackground(Color.lightGray);
 				}
 
@@ -62,6 +71,39 @@ public class MainFrame extends JFrame{
 				
 			});
 		}
+		addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				notifyAll();
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		setLayout(new GridLayout(2,2,10,10));
 		

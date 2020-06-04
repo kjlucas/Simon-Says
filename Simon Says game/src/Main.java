@@ -1,71 +1,102 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
+import java.awt.Color;
+import sedgewick.StdDraw;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
-public class Main{
-	private ArrayList<Integer> pattern = new ArrayList<Integer>();
-	
-	
+public class Main {
+	private static ArrayList<Integer> pattern = new ArrayList<Integer>();
+	public static MainFrame frame = new MainFrame();
+	public static JButton[] components = {frame.redB, frame.yellowB, frame.greenB, frame.blueB};
 
-	public static void main(String[] args) {
-		
-		//SwingUtilities.invokeLater(new Runnable(){
+	private enum button {
+		Red, Yellow, Green, Blue
+	};
 
-			//@Override
-		//	public void run() {
-				// TODO Auto-generated method stub
-		//		new MainFrame();
-				
-				
-			//}
-			
-	//	});
-		
-		MainFrame frame = new MainFrame();
-		int choice = JOptionPane.showConfirmDialog(frame, "New Game?");
-		
-		if(choice == JOptionPane.YES_OPTION) {
-			
-			JFrame f = new JFrame();
-			f.setSize(200,200);
-			f.add(new JLabel("Game Starting"));
-			f.setVisible(true);
-		    final JDialog dialog = new JDialog(f, "Game Starting", true);
-		    Timer timer = new Timer(2000, new ActionListener() {
-		        public void actionPerformed(ActionEvent e) {
-		            dialog.setVisible(false);
-		            dialog.dispose();
-		            f.setVisible(false);
-		            f.dispose();
-		        }
-		    });
-		    timer.setRepeats(false);
-		    timer.start();
+	private static button[] curButton = { button.Red, button.Yellow, button.Green, button.Blue };
 
-		    dialog.setVisible(true); // if modal, application will pause here
-		    
-			//Run game sequence
-		    run();
-		    
-		} else if (choice == JOptionPane.NO_OPTION || choice == JOptionPane.CANCEL_OPTION){
-			frame.setVisible(false);
-			frame.dispose();
-			
-			//let the user press button and makes sounds
+	public static void main(String[] args) throws InterruptedException {
+		boolean done = false;
+		while (!done) {
+			int choice = JOptionPane.showConfirmDialog(frame, "New Game?");
+
+			if (choice == JOptionPane.YES_OPTION) {
+				JOptionPane.showMessageDialog(frame, "Hit OK when ready", "Ready?", JOptionPane.QUESTION_MESSAGE);
+
+				// Run game sequence
+				TimeUnit.SECONDS.sleep(2);
+				run();
+
+			} else if (choice == JOptionPane.NO_OPTION || choice == JOptionPane.CANCEL_OPTION) {
+				done = true;
+				frame.setVisible(false);
+				frame.dispose();
+			}
 		}
-				
-				
-				
+
 	}
-	private void extendPattern() {
-		for(int i = 0; i <= 10; i++) {
-			pattern.add((int) (Math.random()*5));
+
+	public static void run() {
+		boolean wrong = false;
+		extendPattern();
+		int level = 1;
+
+		while (!wrong) {
+			if (level == pattern.size()) {
+				extendPattern();
+			}
+			for (int i = 0; i < level; i++) {
+				int x = pattern.get(i);
+
+				switch (curButton[x]) {
+				case Red:
+					frame.redB.setBackground(frame.redB.getColor());
+					frame.redB.playTone();
+					frame.redB.setBackground(Color.lightGray);
+					break;
+
+				case Green:
+					frame.greenB.setBackground(frame.greenB.getColor());
+					frame.greenB.playTone();
+					frame.greenB.setBackground(Color.lightGray);
+					break;
+
+				case Blue:
+					frame.blueB.setBackground(frame.blueB.getColor());
+					frame.blueB.playTone();
+					frame.blueB.setBackground(Color.lightGray);
+					break;
+
+				case Yellow:
+					frame.yellowB.setBackground(frame.yellowB.getColor());
+					frame.yellowB.playTone();
+					frame.yellowB.setBackground(Color.lightGray);
+					break;
+				}
+
+			}
+			
+			for(int i = 0; i < level; i++) {
+				//wait for a press
+				//check what was pressed
+				//compare to correct choice
+				//break or not accordingly 
+				
+			}
+
+			level++;
+		}
+		clearPattern();
+	}
+
+	private static void extendPattern() {
+		for (int i = 0; i < 20; i++) {
+			pattern.add((int) (Math.random() * 4));
 		}
 	}
-	private void clearPattern() {
+
+	private static void clearPattern() {
 		pattern.clear();
 	}
 }
