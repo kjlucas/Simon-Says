@@ -7,9 +7,9 @@ public class MainButton extends JButton{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public int buttonPitchExp; // The tone the buttons makes
+	final private int buttonPitchDist; // The tone the buttons makes (chromatic distance from A above middle C)
 	final private Color buttonCol;
-	public boolean isPressed = false;
+	private boolean isPressed = false;
 
 	public MainButton(Color color) {
 		// TODO Auto-generated constructor stub
@@ -18,30 +18,39 @@ public class MainButton extends JButton{
 		setOpaque(true);
 
 		if (color == Color.red) {
-			this.buttonPitchExp = 4; // Db
+			this.buttonPitchDist = -11; // Db
 		} else if (color == Color.blue) {
-			this.buttonPitchExp = 6; // Eb
+			this.buttonPitchDist = -9; // Eb
 		} else if (color == Color.green) {
-			this.buttonPitchExp = 8; //  F
+			this.buttonPitchDist = -7; //  F
 		} else if (color.equals(new Color(249, 207, 93))) {
-			this.buttonPitchExp = 11;// Ab
+			this.buttonPitchDist = -4;// Ab
 		} else {
-			this.buttonPitchExp = 0;
+			this.buttonPitchDist = 0;
 		}
 
 	}
 
-	public int getButtonPitchExp() {
-		return buttonPitchExp;
-	}
-	public void setButtonPitchExp(int newExp) {
-		this.buttonPitchExp = newExp;
+	public int getPitchDist() {
+		return buttonPitchDist;
 	}
 	public void playTone() {
+		double hz = 440.0 * Math.pow(2.0, getPitchDist()/12.0);
+		double seconds = 1;
+		int SAMPLE_RATE = 44100;
+		int N = (int) (seconds * SAMPLE_RATE);
+		double[] d = new double [N];
 		
+		for(int i = 0; i<N; i++) {
+			d[i] = Math.sin((2*Math.PI*i*hz)/SAMPLE_RATE);
+		}
+		StdAudio.play(d);
 	}
 	public void setPressed(boolean b) {
 		this.isPressed = b;
+	}
+	public boolean pressed() {
+		return this.isPressed;
 	}
 	public Color getColor() {
 		return buttonCol;
@@ -49,7 +58,7 @@ public class MainButton extends JButton{
 
 	@Override
 	public String toString() {
-		return "Button [Button Color :\n " + buttonCol.toString() + "\n Button Pitch : " + getButtonPitchExp() + "]";
+		return "Button [Button Color :\n " + buttonCol.toString() + "\n Button Pitch : " + getPitchDist() + "]";
 	}
 
 }

@@ -1,5 +1,4 @@
 import java.awt.Color;
-import sedgewick.StdDraw;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -7,14 +6,14 @@ import javax.swing.*;
 
 public class Main {
 	private static ArrayList<Integer> pattern = new ArrayList<Integer>();
-	public static MainFrame frame = new MainFrame();
-	public static JButton[] components = {frame.redB, frame.yellowB, frame.greenB, frame.blueB};
+	private static final MainFrame frame = new MainFrame();
+	private static final MainButton[] mainButtons = {frame.redB, frame.yellowB, frame.greenB, frame.blueB};
 
 	private enum button {
 		Red, Yellow, Green, Blue
 	};
 
-	private static button[] curButton = { button.Red, button.Yellow, button.Green, button.Blue };
+	private static final button[] curButton = { button.Red, button.Yellow, button.Green, button.Blue };
 
 	public static void main(String[] args) throws InterruptedException {
 		boolean done = false;
@@ -48,40 +47,57 @@ public class Main {
 			}
 			for (int i = 0; i < level; i++) {
 				int x = pattern.get(i);
+				MainButton button = mainButtons[x];
 
 				switch (curButton[x]) {
 				case Red:
-					frame.redB.setBackground(frame.redB.getColor());
-					frame.redB.playTone();
-					frame.redB.setBackground(Color.lightGray);
+					button.setBackground(button.getColor());
+					button.playTone();
+					button.setBackground(Color.lightGray);
 					break;
 
 				case Green:
-					frame.greenB.setBackground(frame.greenB.getColor());
-					frame.greenB.playTone();
-					frame.greenB.setBackground(Color.lightGray);
+					button.setBackground(button.getColor());
+					button.playTone();
+					button.setBackground(Color.lightGray);
 					break;
 
 				case Blue:
-					frame.blueB.setBackground(frame.blueB.getColor());
-					frame.blueB.playTone();
-					frame.blueB.setBackground(Color.lightGray);
+					button.setBackground(button.getColor());
+					button.playTone();
+					button.setBackground(Color.lightGray);
 					break;
 
 				case Yellow:
-					frame.yellowB.setBackground(frame.yellowB.getColor());
-					frame.yellowB.playTone();
-					frame.yellowB.setBackground(Color.lightGray);
+					button.setBackground(button.getColor());
+					button.playTone();
+					button.setBackground(Color.lightGray);
 					break;
 				}
 
 			}
 			
 			for(int i = 0; i < level; i++) {
+				int x = pattern.get(i);
 				//wait for a press
-				//check what was pressed
-				//compare to correct choice
+				while(!StdDraw.mousePressed()) { //problem may occur where the MosueEvent in frame happens first
+												 //meaning that the mouse will no longer be pressed by the time the tone is done
+												 //causing the loop check to never register properly. 
+					
+					
+				}
+				//check what was pressed and compare to correct choice
+				if(mainButtons[x].pressed()) { 
 				//break or not accordingly 
+					mainButtons[x].setPressed(false);
+					
+				} else {
+					mainButtons[x].setPressed(false);
+					wrong = true;
+					JOptionPane.showMessageDialog(frame, "You lasted " + (level-1) + " levels", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+					break;
+				}
+				
 				
 			}
 

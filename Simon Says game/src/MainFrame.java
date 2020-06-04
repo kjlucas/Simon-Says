@@ -33,13 +33,7 @@ public class MainFrame extends JFrame{
 			i.setOpaque(true);
 			i.setBackground(Color.lightGray);
 			i.addMouseListener(new MouseListener() {
-
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
+				
 				@Override
 				public void mousePressed(MouseEvent e) {
 					// TODO Auto-generated method stub
@@ -47,14 +41,19 @@ public class MainFrame extends JFrame{
 					i.setPressed(true);
 					i.setBackground(i.getColor());
 					i.playTone();
+					i.setBackground(Color.lightGray);
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
 					
 				}
-
+				
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					// TODO Auto-generated method stub
-					i.setPressed(false);
-					i.setBackground(Color.lightGray);
+					
 				}
 
 				@Override
@@ -71,39 +70,6 @@ public class MainFrame extends JFrame{
 				
 			});
 		}
-		addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				notifyAll();
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
 		
 		setLayout(new GridLayout(2,2,10,10));
 		
