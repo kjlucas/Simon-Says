@@ -4,10 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
-public class Main {
+public class Main implements Runnable{
 	private static ArrayList<Integer> pattern = new ArrayList<Integer>();
 	private static final MainFrame frame = new MainFrame();
-	private static final MainButton[] mainButtons = {frame.redB, frame.yellowB, frame.greenB, frame.blueB};
+	private static final MainButton[] mainButtons = { frame.redB, frame.yellowB, frame.greenB, frame.blueB };
 
 	private enum button {
 		Red, Yellow, Green, Blue
@@ -15,28 +15,7 @@ public class Main {
 
 	private static final button[] curButton = { button.Red, button.Yellow, button.Green, button.Blue };
 
-	public static void main(String[] args) throws InterruptedException {
-		boolean done = false;
-		while (!done) {
-			int choice = JOptionPane.showConfirmDialog(frame, "New Game?");
-
-			if (choice == JOptionPane.YES_OPTION) {
-				JOptionPane.showMessageDialog(frame, "Hit OK when ready", "Ready?", JOptionPane.QUESTION_MESSAGE);
-
-				// Run game sequence
-				TimeUnit.SECONDS.sleep(2);
-				run();
-
-			} else if (choice == JOptionPane.NO_OPTION || choice == JOptionPane.CANCEL_OPTION) {
-				done = true;
-				frame.setVisible(false);
-				frame.dispose();
-			}
-		}
-
-	}
-
-	public static void run() {
+	public void run() {
 		boolean wrong = false;
 		extendPattern();
 		int level = 1;
@@ -76,29 +55,26 @@ public class Main {
 				}
 
 			}
-			
-			for(int i = 0; i < level; i++) {
+
+			for (int i = 0; i < level; i++) {
 				int x = pattern.get(i);
-				//wait for a press
-				while(!StdDraw.mousePressed()) { //problem may occur where the MosueEvent in frame happens first
-												 //meaning that the mouse will no longer be pressed by the time the tone is done
-												 //causing the loop check to never register properly. 
-					
-					
+				// wait for a press
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				//check what was pressed and compare to correct choice
-				if(mainButtons[x].pressed()) { 
-				//break or not accordingly 
-					mainButtons[x].setPressed(false);
-					
-				} else {
-					mainButtons[x].setPressed(false);
+				if (!mainButtons[x].isPressed()) {
 					wrong = true;
-					JOptionPane.showMessageDialog(frame, "You lasted " + (level-1) + " levels", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "You lasted " + (level - 1) + " levels", "Game Over",
+							JOptionPane.INFORMATION_MESSAGE);
 					break;
+
 				}
-				
-				
+				System.out.println("level passed");
+				mainButtons[x].setPressed(false);
+				frame.setPressed(false);
 			}
 
 			level++;
@@ -115,4 +91,27 @@ public class Main {
 	private static void clearPattern() {
 		pattern.clear();
 	}
+
+	public static void main(String[] args) throws InterruptedException {
+		boolean done = false;
+		Thread main = new Thread(new Main());
+		while (!done) {
+			int choice = JOptionPane.showConfirmDialog(frame, "New Game?");
+
+			if (choice == JOptionPane.YES_OPTION) {
+				JOptionPane.showMessageDialog(frame, "Hit OK when ready", "Ready?", JOptionPane.QUESTION_MESSAGE);
+
+				// Run game sequence
+				TimeUnit.SECONDS.sleep(2);
+				main.run();
+
+			} else if (choice == JOptionPane.NO_OPTION || choice == JOptionPane.CANCEL_OPTION) {
+				done = true;
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		}
+
+	}
+
 }

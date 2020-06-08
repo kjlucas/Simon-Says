@@ -1,4 +1,7 @@
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton; 
 
@@ -28,7 +31,6 @@ public class MainButton extends JButton{
 		} else {
 			this.buttonPitchDist = 0;
 		}
-
 	}
 
 	public int getPitchDist() {
@@ -49,7 +51,7 @@ public class MainButton extends JButton{
 	public void setPressed(boolean b) {
 		this.isPressed = b;
 	}
-	public boolean pressed() {
+	public boolean isPressed() {
 		return this.isPressed;
 	}
 	public Color getColor() {

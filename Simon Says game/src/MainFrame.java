@@ -13,6 +13,8 @@ public class MainFrame extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public boolean pressed = false;
+	
 	public MainButton   redB;
 	public MainButton   yellowB;
 	public MainButton   greenB;
@@ -37,11 +39,10 @@ public class MainFrame extends JFrame{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					// TODO Auto-generated method stub
-					
-					i.setPressed(true);
 					i.setBackground(i.getColor());
-					i.playTone();
-					i.setBackground(Color.lightGray);
+					i.setPressed(true);
+					pressed = true;
+					
 				}
 				
 				@Override
@@ -53,7 +54,9 @@ public class MainFrame extends JFrame{
 				@Override
 				public void mouseReleased(MouseEvent e) {
 					// TODO Auto-generated method stub
-					
+					i.setBackground(Color.lightGray);
+					i.playTone();
+					i.notifyAll();
 				}
 
 				@Override
@@ -71,13 +74,51 @@ public class MainFrame extends JFrame{
 			});
 		}
 		
+//		addMouseListener(new MouseListener() {
+//			@Override
+//			public void mousePressed(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				//pressed = true; 
+//			}
+//
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void mouseReleased(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				// TODO Auto-generated method stub
+//				
+//			}});
+		
 		setLayout(new GridLayout(2,2,10,10));
-		
-		
 		setSize(600,600);
 		getContentPane().setBackground(Color.gray); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+
+	public boolean isPressed() {
+		return pressed;
+	}
+
+	public void setPressed(boolean pressed) {
+		this.pressed = pressed;
+	}
+	
 	
 }
