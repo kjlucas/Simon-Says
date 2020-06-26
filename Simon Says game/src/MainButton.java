@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton; 
@@ -12,7 +10,7 @@ public class MainButton extends JButton{
 	private static final long serialVersionUID = 1L;
 	final private int buttonPitchDist; // The tone the buttons makes (chromatic distance from A above middle C)
 	final private Color buttonCol;
-	private boolean isPressed = false;
+	//private boolean isPressed = false;
 
 	public MainButton(Color color) {
 		// TODO Auto-generated constructor stub
@@ -47,20 +45,21 @@ public class MainButton extends JButton{
 			d[i] = Math.sin((2*Math.PI*i*hz)/SAMPLE_RATE);
 		}
 		StdAudio.play(d);
+		return;
 	}
-	public void setPressed(boolean b) {
-		this.isPressed = b;
-	}
-	public boolean isPressed() {
-		return this.isPressed;
-	}
+//	public void setPressed(boolean b) {
+//		this.isPressed = b;
+//	}
+//	public boolean isPressed() {
+//		return this.isPressed;
+//	}
 	public Color getColor() {
 		return buttonCol;
 	}
 
 	@Override
 	public String toString() {
-		return "Button [Button Color :\n " + buttonCol.toString() + "\n Button Pitch : " + getPitchDist() + "]";
+		return "Button [Button Color : " + buttonCol.toString() + "\n Button Pitch : " + getPitchDist() + "]";
 	}
 
 }
