@@ -35,14 +35,13 @@ public class MainFrame extends JFrame {
 				@Override
 				public void mousePressed(MouseEvent e) {
 					// TODO Auto-generated method stub
-
+					pressed = i;
 				}
 
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					// TODO Auto-generated method stub
-					pressed = i;
-					System.out.println(pressed.toString());
+					
 				}
 
 				@Override
@@ -77,7 +76,7 @@ public class MainFrame extends JFrame {
 class ButtonListener extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+
 	}
-	
+
 }
