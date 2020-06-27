@@ -10,7 +10,6 @@ public class MainButton extends JButton{
 	private static final long serialVersionUID = 1L;
 	final private int buttonPitchDist; // The tone the buttons makes (chromatic distance from A above middle C)
 	final private Color buttonCol;
-	//private boolean isPressed = false;
 
 	public MainButton(Color color) {
 		// TODO Auto-generated constructor stub
@@ -47,12 +46,6 @@ public class MainButton extends JButton{
 		StdAudio.play(d);
 		return;
 	}
-//	public void setPressed(boolean b) {
-//		this.isPressed = b;
-//	}
-//	public boolean isPressed() {
-//		return this.isPressed;
-//	}
 	public Color getColor() {
 		return buttonCol;
 	}

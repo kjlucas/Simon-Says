@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -19,8 +18,10 @@ public class MainFrame extends JFrame {
 	public MainButton yellowB;
 	public MainButton greenB;
 	public MainButton blueB;
-	public MainButton[] buttons = { redB = new MainButton(Color.red), yellowB = new MainButton(new Color(249, 207, 93)),
-			greenB = new MainButton(Color.green), blueB = new MainButton(Color.blue) };
+	public MainButton[] buttons = { redB = new MainButton(Color.red), 
+									yellowB = new MainButton(new Color(249, 207, 93)),
+									greenB = new MainButton(Color.green), 
+									blueB = new MainButton(Color.blue) };
 
 	public MainFrame() {
 		super("Simon Says");
@@ -69,14 +70,6 @@ public class MainFrame extends JFrame {
 		getContentPane().setBackground(Color.gray);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-	}
-
-}
-
-class ButtonListener extends MouseAdapter {
-	@Override
-	public void mouseClicked(MouseEvent e) {
-
 	}
 
 }
